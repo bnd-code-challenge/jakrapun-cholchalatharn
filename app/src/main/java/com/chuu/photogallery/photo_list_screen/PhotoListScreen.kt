@@ -1,5 +1,6 @@
 package com.chuu.photogallery.photo_list_screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,18 +32,21 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun PhotoListScreen(
     modifier: Modifier = Modifier,
-    viewModel: PhotoListScreenViewModel = koinViewModel()
+    viewModel: PhotoListScreenViewModel = koinViewModel(),
+    onItemClick: (String, String) -> Unit = {_, _, ->}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     PhotoListScreen(
-        uiState = uiState
+        uiState = uiState,
+        onItemClick
     )
 
 }
 @Composable
 fun PhotoListScreen(
-    uiState: PhotoListScreenViewModel.UIState
+    uiState: PhotoListScreenViewModel.UIState,
+    onItemClick: (String, String) -> Unit = {_, _, ->}
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize()
@@ -54,7 +58,8 @@ fun PhotoListScreen(
         ) {
             items(uiState.photos) { item ->
                 PhotoItemView(
-                    item
+                    item,
+                    onItemClick
                 )
             }
         }
@@ -63,11 +68,18 @@ fun PhotoListScreen(
 
 @Composable
 fun PhotoItemView(
-    photoItem: PhotoItem
+    photoItem: PhotoItem,
+    onItemClick: (String, String) -> Unit = {_, _, ->}
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
-            .padding(24.dp),
+            .padding(24.dp)
+            .clickable { 
+                onItemClick(
+                    photoItem.url,
+                    photoItem.title
+                )
+            },
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
