@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.ksp)
 
     id("kotlin-parcelize")
 }
@@ -51,10 +50,6 @@ dependencies {
     api(project.dependencies.platform(libs.koin.bom))
     api(libs.koin.core)
     api(libs.koin.android)
-
-    //room
-    api(libs.room)
-    api(libs.room.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

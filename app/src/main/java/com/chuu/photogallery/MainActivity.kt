@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.chuu.photogallery.photo_list_screen.PhotoListScreen
 import com.chuu.photogallery.ui.theme.PhotoGalleryTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,8 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PhotoGalleryTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    PhotoListScreen(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
