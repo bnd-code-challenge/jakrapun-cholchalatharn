@@ -22,3 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "PhotoGallery"
 include(":app")
 include(":core:network")
+include(":core:base")
+include(":shares:photo-service")
